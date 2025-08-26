@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Quark</title>
+    <link rel="icon" href="../photos/favicons/favicon-dark.ico" type="image/x-icon" />
+    <link rel="icon" href="../photos/favicons/favicon-96x96-dark.png" sizes="96x96" type="image/png" />
+    <link rel="icon" href="../photos/favicons/favicon-dark.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="../photos/favicons/apple-touch-icon-dark.png" />
+    <link rel="manifest" href="../photos/favicons/site.webmanifest" />
+    <link rel="icon" href="../photos/favicons/web-app-manifest-192x192-dark.png" sizes="192x192" type="image/png" />
+    <link rel="icon" href="../photos/favicons/web-app-manifest-512x512-dark.png" sizes="512x512" type="image/png" />
+    <link rel="stylesheet" href="../style.css">
+    <script src="../script.js"></script>
+    <style>
+        body::before {
+            background: black url("../photos/WSFDark.png") no-repeat center / contain;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <a href="/index">Home</a>
+        <a href="/about">About</a>
+        <a href="/projects">Projects</a>
+        <a href="/ramblings">Ramblings</a>
+    </div>
+    <div>
+        <h1 style="text-align: center">Function Warping</h1>
+        <p style="text-align: center">
+            Function Warping is what I've begun to call, where instead of graphing a
+            function f so that every point on f makes an orthogonal altitude with the
+            x-axis, you first graph an auxillary axis function X so that f is graphed
+            orthogonal to X and not the x-axis, effectively warping f onto X.
+        </p>
+    </div>
+    <div>
+        <h2>TL;DR</h2>
+        <p>If you just want the parametric curve, here it is:</p>
+        <math display="block">
+            <mrow>
+                <mi> M(f,X) </mi>
+                <mo> = </mo>
+                <mi> (t,X(t)) </mi>
+                <mo> + </mo>
+                <mfrac>
+                    <mrow>
+                        <mi> f(L(t)) </mi>
+                    </mrow>
+                    <mrow>
+                        <mi> L'(t) </mi>
+                    </mrow>
+                </mfrac>
+                <mfrac>
+                    <mrow>
+                        <mo> d </mo>
+                    </mrow>
+                    <mrow>
+                        <mi> dt </mi>
+                    </mrow>
+                </mfrac>
+                <msub>
+                    <mi> R </mi>
+                    <mi> -π/2 </mi>
+                </msub>
+                <mi> (t,X(t)) </mi>
+            </mrow>
+        </math>
+        <p>
+            L here is the arc length function of X from the 0 to t, and R is a rotation operator
+            (specifically 90 degrees counter-clockwise): it could be a matrix, or a
+            function, or however you want to define clockwise rotations
+        </p>
+    </div>
+    <div>
+        <h2>What's Actually Going on</h2>
+        <p>
+            There's a lot of symbols in the above equation, so let's break it down:
+        </p>
+        <ol>
+            <li>
+                This is a parametric curve: instead of graphing directly from x to y, we
+                graph both x and y from a different independent variable (in this case
+                t). In most cases, our parametric curve won't be a function, but there
+                are some cases where you can solve t for x and then plug that into y to
+                get a function that graphs as if we started with a direct relationship.
+            </li>
+            <li>
+                We start with <math>
+                    <mi>(t,X(t))</mi>
+                </math>, basically the point on X if we plugged in t.
+            </li>
+            <li>
+                Then we take a detour to get the angle of the tangent line of X and the
+                x-axis at this <math>
+                    <mi>(t,X(t))</mi>
+                </math> point:
+                <math>
+                    <msup>
+                        <mi>tan</mi>
+                        <mi>-1</mi>
+                    </msup>
+                    <mi>(X'(t))</mi>
+                </math>
+                (<math>
+                    <mi>X'(t)(x-t)+X(t)</mi>
+                </math> is our tangent line, therefore
+                <math>
+                    <mi>tan(θ)=X'(t)</mi>
+                </math>, hence
+                <math>
+                    <msup>
+                        <mi>tan</mi>
+                        <mi>-1</mi>
+                    </msup>
+                    <mi>(X'(t))</mi>
+                </math>).
+            </li>
+            <li>
+                Next, we get the normal vector with this angle:
+                <math>
+                    <mi>(cos(θ),sin(θ))</mi>
+                </math>
+            </li>
+            <li>
+                By rotating this normal vector 90 degrees counter-clockwise (<math>
+                    <msub>
+                        <mi> R </mi>
+                        <mi> -π/2 </mi>
+                    </msub>
+                    <mi>(cos(θ),sin(θ))</mi>
+                </math>
+                or <math>
+                    <mi>(-sin(θ),cos(θ))</mi>
+                </math>, we'll be keeping the rotater for brevities sake), we get the direction our warped function is
+                from
+                our point on the axis function.
+            </li>
+            <li>Now that we have the correct direction, to get the correct length, we must multiply by our f function,
+                yet
+                know this, we don't multiply by <math>
+                    <mi>f(t)</mi>
+                </math>, but by <math>
+                    <mi>f(L(t))</mi>
+                </math> where <math>
+                    <mi>L</mi>
+                    <mo>=</mo>
+                    <mo>∫</mo>
+                    <msqrt>
+                        <mn>1</mn>
+                        <mo>+</mo>
+                        <msup>
+                            <mi>X'(t)</mi>
+                            <mn>2</mn>
+                        </msup>
+                    </msqrt>
+                    <mi>dt</mi>
+                </math>. This is because, as where t is how along we are on the x axis, L(t) is how far along we are on
+                the
+                axis function.</li>
+            <li>Putting it all together, we get <math>
+                    <mi>(t,X(t))</mi>
+                    <mo>+</mo>
+                    <mi>f(L(t))</mi>
+                    <msub>
+                        <mi>R</mi>
+                        <mi> -π/2 </mi>
+                    </msub>
+                    <mi>(cos(arctan(X'(t))),sin(arctan(X'(t))))</mi>
+                </math></li>
+        </ol>
+        <p>now techincally we could stop here, this will work, but if there's one thing i've learned, its that gulfing
+            is
+            20% of the work, but 80% of the enjoyment. There are a few things we can do to make this simpler:</p>
+        <ul>
+            <li>first we employ our trig-arctrig identities. specifically <math>
+                    <mi>sin(arctan(x))=</mi>
+                    <mfrac>
+                        <mrow>
+
+                            <mi>x</mi>
+
+                        </mrow>
+                        <mrow>
+                            <msqrt>
+                                <mn>1</mn>
+                                <mo>+</mo>
+                                <msup>
+                                    <mi>x</mi>
+                                    <mn>2</mn>
+                                </msup>
+                            </msqrt>
+                        </mrow>
+                    </mfrac>
+
+                </math> and <math>
+                    <mi>cos(arctan(x))=</mi>
+                    <mfrac>
+                        <mrow>
+
+                            <mn>1</mn>
+
+                        </mrow>
+                        <mrow>
+                            <msqrt>
+                                <mn>1</mn>
+                                <mo>+</mo>
+                                <msup>
+                                    <mi>x</mi>
+                                    <mn>2</mn>
+                                </msup>
+                            </msqrt>
+                        </mrow>
+                    </mfrac>
+
+                </math>, resulting in <math>
+                    <mi>(t,X(t))</mi>
+                    <mo>+</mo>
+                    <mi>f(L(t))</mi>
+                    <msub>
+                        <mi>R</mi>
+                        <mi>-π/2</mi>
+                    </msub>
+                    <mi>(</mi>
+                    <mfrac>
+                        <mrow>
+
+                            <mn>1</mn>
+
+                        </mrow>
+                        <mrow>
+                            <msqrt>
+                                <mn>1</mn>
+                                <mo>+</mo>
+                                <msup>
+                                    <mi>X'(t)</mi>
+                                    <mn>2</mn>
+                                </msup>
+                            </msqrt>
+                        </mrow>
+                    </mfrac>
+                    <mi>,</mi>
+                    <mfrac>
+                        <mrow>
+
+                            <mi>X'(t)</mi>
+
+                        </mrow>
+                        <mrow>
+                            <msqrt>
+                                <mn>1</mn>
+                                <mo>+</mo>
+                                <msup>
+                                    <mi>X'(t)</mi>
+                                    <mn>2</mn>
+                                </msup>
+                            </msqrt>
+                        </mrow>
+                    </mfrac>
+                    <mi>)</mi>
+                </math></li>
+            <li>this next one is a dual feature: first, we factor out the <math>
+                    <mfrac>
+                        <mrow>
+
+                            <mi>1</mi>
+
+                        </mrow>
+                        <mrow>
+                            <msqrt>
+                                <mn>1</mn>
+                                <mo>+</mo>
+                                <msup>
+                                    <mi>X'(t)</mi>
+                                    <mn>2</mn>
+                                </msup>
+                            </msqrt>
+                        </mrow>
+                    </mfrac>
+                </math> from our normal vector; then we realize that <math>
+                    <msqrt>
+                        <mn>1</mn>
+                        <mo>+</mo>
+                        <msup>
+                            <mi>X'(t)</mi>
+                            <mn>2</mn>
+                        </msup>
+                    </msqrt>
+                </math> is the derivative of our arc length function, those two together gives us <math>
+                    <mi>(t,X(t))</mi>
+                    <mo>+</mo>
+                    <mi>f(L(t))</mi>
+                    <msub>
+                        <mi>R</mi>
+                        <mi>-π/2</mi>
+                        <mfrac>
+                            <mrow>
+                                <mi>(1,X'(t))</mi>
+                            </mrow>
+                            <mrow>
+                                <mi>L'(t)</mi>
+                            </mrow>
+                        </mfrac>
+                    </msub>
+                </math></li>
+            <li>the last thing we can do is replace <math>
+                    <mi>(1,X'(t))</mi>
+                </math> with <math>
+                    <mfrac>
+                        <mrow>
+                            <mo>d</mo>
+                        </mrow>
+                        <mrow>
+                            <mi>dt</mi>
+                        </mrow>
+                    </mfrac>
+                    <mi>(t,X(t))</mi>
+                </math>, leaving us with <math>
+                    <mi>(t,X(t))</mi>
+                    <mo>+</mo>
+                    <mi>f(L(t))</mi>
+                    <msub>
+                        <mi>R</mi>
+                        <mi>-π/2</mi>
+                        <mfrac>
+                            <mrow>
+                                <mfrac>
+                                    <mrow>
+                                        <mo>d</mo>
+                                    </mrow>
+                                    <mrow>
+                                        <mi>dt</mi>
+                                    </mrow>
+                                </mfrac>
+                                <mi>(t,X(t))</mi>
+                            </mrow>
+                            <mrow>
+                                <mi>L'(t)</mi>
+                            </mrow>
+                        </mfrac>
+                    </msub>
+                </math></li>
+        </ul>
+        now you could stop here... but if you keep the cameras rolling, I'd rearrange this into the nicer albeit less
+        coherent equation: <math display="block">
+            <mrow>
+                <mi> M(f,X) </mi>
+                <mo> = </mo>
+                <mi> (t,X(t)) </mi>
+                <mo> + </mo>
+                <mfrac>
+                    <mrow>
+                        <mi> f(L(t)) </mi>
+                    </mrow>
+                    <mrow>
+                        <mi> L'(t) </mi>
+                    </mrow>
+                </mfrac>
+                <mfrac>
+                    <mrow>
+                        <mo> d </mo>
+                    </mrow>
+                    <mrow>
+                        <mi> dt </mi>
+                    </mrow>
+                </mfrac>
+                <msub>
+                    <mi> R </mi>
+                    <mi> -π/2 </mi>
+                </msub>
+                <mi> (t,X(t)) </mi>
+            </mrow>
+        </math>
+    </div>
+
+    <h2>The long and short of it</h2>
+    <p>Now I can go and blab about how it's done, but that doesn't really matter unless I actually show you how I'm
+        thinking about the problem and how I actually got to where I ended up.</p>
+    <h3>How a function is regularly graphed</h3>
+    <p>First things first, how is a function actually graphed? Below you'll see a diagram that shows that for a point
+        (x,f(x)), we go x units right from the origin, and directly up, we go f(x) units. Notice how the line that goes
+        directly up makes a right angle with the x-axis.</p>
+    <canvas id="reg" width="100%" height="500" style="display: block;">
+    </canvas>
+    <script>
+        const canvas1 = document.getElementById("reg");
+        function draw() {
+            canvas1.width = window.innerWidth - canvas1.width;
+
+            const width = canvas1.width;
+            const height = canvas1.height;
+            drawFunctionOnCanvas(canvas1,
+                x => x,
+                {
+                    origin: { x: width * .05, y: height * .9 },
+                    scaleX: 40, // pixels per unit in x
+                    scaleY: 40, // pixels per unit in y
+                    color: 'purple',
+                    lineWidth: 2,
+                    xMax: width
+                }
+            );
+            drawLine(canvas1, { x: width / 200, y: 0 }, { x: width / 200, y: width / 200 }, {
+                origin: { x: width * .05, y: height * .9 },
+                scaleX: 40, // pixels per unit in x
+                scaleY: 40, // pixels per unit in y
+                color: 'cyan',
+                lineWidth: 2,
+                xMax: width
+            });
+            drawLine(canvas1, { x: 0, y: 0 }, { x: width / 200, y: 0 }, {
+                origin: { x: width * .05, y: height * .9 },
+                scaleX: 40, // pixels per unit in x
+                scaleY: 40, // pixels per unit in y
+                color: 'red',
+                lineWidth: 2,
+                xMax: width
+            });
+
+            const ctx = canvas1.getContext("2d");
+            ctx.font = "12px Ariel";
+            ctx.fillStyle = "red";
+            ctx.fillText("x", 40 * Math.PI - 20, height - 60)
+            ctx.fillStyle = "cyan";
+            ctx.fillText("f(x)", 40 * width / 200 + width * .05 + 5, height - 70)
+        }
+        draw();
+        window.addEventListener('resize', draw);
+    </script>
+    <small style="text-align: center;">Note: I'll only be showing the first quadrant, but all of these graphics should
+        apply
+        to the other quadrants as well.</small>
+    <p>Instead of going x units along the x-axis and then f(x) units directly up orthogonaly from the x-axis, I wanted
+        my warped function to go x' units along the axis function and f(x') units up. Below you'll see that with <math>
+            <mi>sin(x)</mi>
+        </math> as our axis function and <math>
+            <mi>x</mi>
+        </math> as our warped function</p>
+    <canvas id="sinasaxis" width="100%" height="500" style="display: block;">
+    </canvas>
+    <script>
+        function draw() {
+            canvas.width = window.innerWidth - canvas.width;
+
+            const width = canvas.width;
+            const height = canvas.height;
+            drawFunctionOnCanvas(canvas,
+                Math.sin,
+                {
+                    origin: { x: width * .05, y: height * .90 },
+                    scaleX: 40, // pixels per unit in x
+                    scaleY: 40, // pixels per unit in y
+                    color: 'gray',
+                    lineWidth: 2,
+                    xMax: width
+                }
+            );
+            drawFunctionArc(canvas,
+                Math.sin,
+                0,
+                width / 200,
+                {
+                    origin: { x: width * .05, y: height * .90 },
+                    scaleX: 40, // pixels per unit in x
+                    scaleY: 40, // pixels per unit in y
+                    color: 'red',
+                    lineWidth: 2
+                }
+            );
+            function precomputeIntegral(f, tStart, tEnd, nSteps = 10000) {
+                const dt = (tEnd - tStart) / nSteps;
+                const table = [0]; // integral at tStart = 0
+                let sum = 0;
+                const ts = [tStart];
+
+                for (let i = 1; i <= nSteps; i++) {
+                    const t = tStart + i * dt;
+                    const prev = t - dt;
+                    sum += 0.5 * (f(prev) + f(t)) * dt; // trapezoid
+                    table.push(sum);
+                    ts.push(t);
+                }
+
+                return function (t) {
+                    // Linear interpolation
+                    if (t <= tStart) return 0;
+                    if (t >= tEnd) return table[table.length - 1];
+                    const i = Math.floor((t - tStart) / dt);
+                    const frac = (t - ts[i]) / dt;
+                    return table[i] * (1 - frac) + table[i + 1] * frac;
+                };
+            }
+
+            const integralFunc = precomputeIntegral(z => Math.sqrt(1 + Math.cos(z) ** 2), 0, 11);
+
+            // Parametric functions
+            const xFunc = t => t - Math.cos(t) * integralFunc(t) / Math.sqrt(1 + Math.cos(t) ** 2);
+            const yFunc = t => Math.sin(t) + integralFunc(t) / Math.sqrt(1 + Math.cos(t) ** 2);
+
+            // Draw the parametric curve
+            drawParametric(canvas, xFunc, yFunc, {
+                origin: { x: width * 0.05, y: height * 0.9 },
+                scaleX: 40,
+                scaleY: 40,
+                color: 'purple',
+                lineWidth: 2,
+                tStart: 0,
+                tEnd: 11,
+                step: 0.01
+            });
+            drawParametric(canvas, t => -xFunc(t), t => -yFunc(t), {
+                origin: { x: width * 0.05, y: height * 0.9 },
+                scaleX: 40,
+                scaleY: 40,
+                color: 'purple',
+                lineWidth: 2,
+                tStart: 0,
+                tEnd: 1,
+                step: 0.01
+            });
+            drawLine(canvas, { x: width / 200, y: Math.sin(width / 200) }, { x: xFunc(width / 200), y: yFunc(width / 200) }, {
+                origin: { x: width * .05, y: height * .90 },
+                scaleX: 40, // pixels per unit in x
+                scaleY: 40, // pixels per unit in y
+                color: 'cyan',
+                lineWidth: 2,
+                xMax: width
+            });
+            const ctx = canvas.getContext("2d");
+            ctx.font = "12px Ariel";
+            ctx.fillStyle = "red";
+            ctx.fillText("x'", 40 * Math.PI - 20, height - 60)
+            ctx.fillStyle = "cyan";
+            ctx.fillText("f(x')", 15 * width * Math.PI / 200, height - Math.sin(width / 200) - 48)
+        }
+        const canvas = document.getElementById("sinasaxis");
+        draw();
+        window.addEventListener('resize', draw);
+    </script>
+    <small style="text-align: center;">Another note: if you're screen is much wider than mine (1920 pixels), these will
+        be too far along for my precombed parametric and baked canvas height. Although I doubt that will be a problem,
+        if the cyan altitude isnt touching the purple function, shorten your window a tad and reload the tab because
+        manual resizing causes the canvas size to twitch.</small>
+</body>
+
+</html>
