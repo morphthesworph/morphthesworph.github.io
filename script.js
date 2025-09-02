@@ -50,9 +50,7 @@ function drawFunctionOnCanvas(canvas, f, options = {}) {
     const color = options.color ?? 'blue';
     const lineWidth = options.lineWidth ?? 2;
     const step = options.step ?? 1 / scaleX; // step in objective units
-
-    ctx.clearRect(0, 0, width, height); // Clear previous drawing
-    drawAxes(ctx, width, height, origin.x, origin.y);
+    
 
     ctx.strokeStyle = color;
     ctx.lineWidth = lineWidth;
@@ -80,7 +78,7 @@ function drawFunctionOnCanvas(canvas, f, options = {}) {
 function drawFunctionArc(canvas, f, xStart, xEnd, options = {}) {
     const ctx = canvas.getContext('2d');
     const origin = options.origin ?? { x: canvas.width / 2, y: canvas.height / 2 };
-    const scaleX = options.scaleX ?? 40;
+    const scaleX = options.scaleX ?? 420;
     const scaleY = options.scaleY ?? 40;
     const color = options.color ?? 'red';
     const lineWidth = options.lineWidth ?? 2;

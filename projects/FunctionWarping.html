@@ -30,52 +30,98 @@
     <div>
         <h1 style="text-align: center">Function Warping</h1>
         <p style="text-align: center">
-            Function Warping is what I've begun to call, where instead of graphing a
-            function f so that every point on f makes an orthogonal altitude with the
-            x-axis, you first graph an auxillary axis function X so that f is graphed
-            orthogonal to X and not the x-axis, effectively warping f onto X.
+            Function Warping is what I've begun to call, where you graph a function using another normally graphed
+            function as the x axis.
         </p>
     </div>
+    <p>This piece is divided into 4 individual parts:</p>
+    <ol>
+        <li><a href="#tldr">TL;DR: the paramaterization and related functions</a></li>
+        <li><a href="#thegist">The Gist: a brief explanation of the equation given in the tl;dr</a></li>
+        <li><a href="#tlasoi">The Long and Short of it: my personal walkthrough of how I derived the equation</a></li>
+        <li><a href="#bwtm">But Wait! There's More: some interesting things that I've seen while playing around with
+                this.</a></li>
+    </ol>
     <div>
-        <h2>TL;DR</h2>
+        <h2 id="tldr">TL;DR</h2>
         <p>If you just want the parametric curve, here it is:</p>
-        <math display="block">
-            <mrow>
-                <mi> M(f,X) </mi>
-                <mo> = </mo>
-                <mi> (t,X(t)) </mi>
-                <mo> + </mo>
-                <mfrac>
-                    <mrow>
-                        <mi> f(L(t)) </mi>
-                    </mrow>
-                    <mrow>
-                        <mi> L'(t) </mi>
-                    </mrow>
-                </mfrac>
-                <mfrac>
-                    <mrow>
-                        <mo> d </mo>
-                    </mrow>
-                    <mrow>
-                        <mi> dt </mi>
-                    </mrow>
-                </mfrac>
-                <msub>
-                    <mi> R </mi>
-                    <mi> -π/2 </mi>
-                </msub>
-                <mi> (t,X(t)) </mi>
+        <math display="block" class="tml-display" style="display:block math;">
+            <mrow notation="box" scriptlevel="0" displaystyle="true"
+                style="padding:padding: 3pt 0 3pt 0;border:1px solid;">
+                <mspace width="3pt"></mspace>
+                <mrow>
+                    <mi>W</mi>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>f</mi>
+                    <mo separator="true">,</mo>
+                    <mi>X</mi>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mo>=</mo>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>t</mi>
+                    <mo separator="true">,</mo>
+                    <mi>X</mi>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>t</mi>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mo>+</mo>
+                    <mfrac>
+                        <mrow>
+                            <mi>f</mi>
+                            <mo form="prefix" stretchy="false">(</mo>
+                            <mi>L</mi>
+                            <mo form="prefix" stretchy="false">(</mo>
+                            <mi>t</mi>
+                            <mo form="postfix" stretchy="false">)</mo>
+                            <mo form="postfix" stretchy="false" lspace="0em" rspace="0em">)</mo>
+                        </mrow>
+                        <mrow>
+                            <mi>L</mi>
+                            <mo class="tml-prime">′</mo>
+                            <mo form="prefix" stretchy="false">(</mo>
+                            <mi>t</mi>
+                            <mo form="postfix" stretchy="false" lspace="0em" rspace="0em">)</mo>
+                        </mrow>
+                    </mfrac>
+                    <mfrac>
+                        <mtext>d</mtext>
+                        <mrow>
+                            <mtext>d</mtext>
+                            <mi>t</mi>
+                        </mrow>
+                    </mfrac>
+                    <msub>
+                        <mi>R</mi>
+                        <mrow>
+                            <mo lspace="0em" rspace="0em">−</mo>
+                            <mfrac>
+                                <mi>π</mi>
+                                <mn>2</mn>
+                            </mfrac>
+                        </mrow>
+                    </msub>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>t</mi>
+                    <mo separator="true">,</mo>
+                    <mi>X</mi>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>t</mi>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mo form="postfix" stretchy="false" lspace="0em" rspace="0em">)</mo>
+                </mrow>
+                <mspace width="3pt"></mspace>
             </mrow>
         </math>
+
         <p>
             L here is the arc length function of X from the 0 to t, and R is a rotation operator
             (specifically 90 degrees counter-clockwise): it could be a matrix, or a
-            function, or however you want to define clockwise rotations
+            function, or however you want to define rotations.
         </p>
     </div>
     <div>
-        <h2>What's Actually Going on</h2>
+        <h2 id="thegist">The Gist</h2>
         <p>
             There's a lot of symbols in the above equation, so let's break it down:
         </p>
@@ -122,7 +168,7 @@
                 Next, we get the normal vector with this angle:
                 <math>
                     <mi>(cos(θ),sin(θ))</mi>
-                </math>
+                </math>.
             </li>
             <li>
                 By rotating this normal vector 90 degrees counter-clockwise (<math>
@@ -171,11 +217,10 @@
                     <mi>(cos(arctan(X'(t))),sin(arctan(X'(t))))</mi>
                 </math></li>
         </ol>
-        <p>now techincally we could stop here, this will work, but if there's one thing i've learned, its that gulfing
-            is
-            20% of the work, but 80% of the enjoyment. There are a few things we can do to make this simpler:</p>
+        <p>Now the basic foundation is set, all that's left is some cleanup to solve some injective faux paus' and
+            cleanliness:</p>
         <ul>
-            <li>first we employ our trig-arctrig identities. specifically <math>
+            <li>First we employ our trig-arctrig identities. specifically <math>
                     <mi>sin(arctan(x))=</mi>
                     <mfrac>
                         <mrow>
@@ -260,8 +305,8 @@
                         </mrow>
                     </mfrac>
                     <mi>)</mi>
-                </math></li>
-            <li>this next one is a dual feature: first, we factor out the <math>
+                </math>.</li>
+            <li>This next one is a dual feature: first, we factor out the <math>
                     <mfrac>
                         <mrow>
 
@@ -304,8 +349,8 @@
                             </mrow>
                         </mfrac>
                     </msub>
-                </math></li>
-            <li>the last thing we can do is replace <math>
+                </math>.</li>
+            <li>The last thing we can do is replace <math>
                     <mi>(1,X'(t))</mi>
                 </math> with <math>
                     <mfrac>
@@ -341,12 +386,12 @@
                             </mrow>
                         </mfrac>
                     </msub>
-                </math></li>
+                </math>.</li>
         </ul>
         now you could stop here... but if you keep the cameras rolling, I'd rearrange this into the nicer albeit less
         coherent equation: <math display="block">
             <mrow>
-                <mi> M(f,X) </mi>
+                <mi> W(f,X) </mi>
                 <mo> = </mo>
                 <mi> (t,X(t)) </mi>
                 <mo> + </mo>
@@ -375,28 +420,33 @@
         </math>
     </div>
 
-    <h2>The long and short of it</h2>
+    <h2 id="tlasoi">The Long and Short of it</h2>
     <p>Now I can go and blab about how it's done, but that doesn't really matter unless I actually show you how I'm
         thinking about the problem and how I actually got to where I ended up.</p>
-    <h3>How a function is regularly graphed</h3>
+    <h3>How a function is regularly graphed?</h3>
     <p>First things first, how is a function actually graphed? Below you'll see a diagram that shows that for a point
         (x,f(x)), we go x units right from the origin, and directly up, we go f(x) units. Notice how the line that goes
         directly up makes a right angle with the x-axis.</p>
-    <canvas id="reg" width="100%" height="500" style="display: block;">
+    <canvas id="reg">
     </canvas>
     <script>
         const canvas1 = document.getElementById("reg");
         function draw() {
-            canvas1.width = window.innerWidth - canvas1.width;
+            canvas1.width = canvas1.clientWidth;
+            canvas1.height = canvas1.clientHeight;
+
 
             const width = canvas1.width;
             const height = canvas1.height;
+
+            const ctx = canvas1.getContext("2d");
+            drawAxes(ctx, width, height, width * .05, height * .90);
             drawFunctionOnCanvas(canvas1,
                 x => x,
                 {
                     origin: { x: width * .05, y: height * .9 },
-                    scaleX: 40, // pixels per unit in x
-                    scaleY: 40, // pixels per unit in y
+                    scaleX: 40,
+                    scaleY: 40,
                     color: 'purple',
                     lineWidth: 2,
                     xMax: width
@@ -404,27 +454,30 @@
             );
             drawLine(canvas1, { x: width / 200, y: 0 }, { x: width / 200, y: width / 200 }, {
                 origin: { x: width * .05, y: height * .9 },
-                scaleX: 40, // pixels per unit in x
-                scaleY: 40, // pixels per unit in y
+                scaleX: 40,
+                scaleY: 40,
                 color: 'cyan',
                 lineWidth: 2,
                 xMax: width
             });
             drawLine(canvas1, { x: 0, y: 0 }, { x: width / 200, y: 0 }, {
                 origin: { x: width * .05, y: height * .9 },
-                scaleX: 40, // pixels per unit in x
-                scaleY: 40, // pixels per unit in y
+                scaleX: 40,
+                scaleY: 40,
                 color: 'red',
                 lineWidth: 2,
                 xMax: width
             });
-
-            const ctx = canvas1.getContext("2d");
             ctx.font = "12px Ariel";
             ctx.fillStyle = "red";
-            ctx.fillText("x", 40 * Math.PI - 20, height - 60)
+            ctx.fillText("x", 40 * Math.PI / 2 + width * .05, height - 60)
             ctx.fillStyle = "cyan";
             ctx.fillText("f(x)", 40 * width / 200 + width * .05 + 5, height - 70)
+            ctx.fillStyle = "white";
+            ctx.beginPath();
+            ctx.arc(40 * width / 200 + width * .05, 555 * .9 - 40 * width / 200, 5, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.closePath();
         }
         draw();
         window.addEventListener('resize', draw);
@@ -436,22 +489,26 @@
         my warped function to go x' units along the axis function and f(x') units up. Below you'll see that with <math>
             <mi>sin(x)</mi>
         </math> as our axis function and <math>
-            <mi>x</mi>
+            <mi>W(x,sin(x))</mi>
         </math> as our warped function</p>
-    <canvas id="sinasaxis" width="100%" height="500" style="display: block;">
+    <canvas id="sinasaxis">
     </canvas>
     <script>
         function draw() {
-            canvas.width = window.innerWidth - canvas.width;
+            canvas.width = canvas.clientWidth;
+            canvas.height = canvas.clientHeight;
 
             const width = canvas.width;
             const height = canvas.height;
+
+            const ctx = canvas.getContext("2d");
+            drawAxes(ctx, width, height, width * .05, height * .90);
             drawFunctionOnCanvas(canvas,
                 Math.sin,
                 {
                     origin: { x: width * .05, y: height * .90 },
-                    scaleX: 40, // pixels per unit in x
-                    scaleY: 40, // pixels per unit in y
+                    scaleX: 40,
+                    scaleY: 40,
                     color: 'gray',
                     lineWidth: 2,
                     xMax: width
@@ -463,28 +520,28 @@
                 width / 200,
                 {
                     origin: { x: width * .05, y: height * .90 },
-                    scaleX: 40, // pixels per unit in x
-                    scaleY: 40, // pixels per unit in y
+                    scaleX: 40,
+                    scaleY: 40,
                     color: 'red',
                     lineWidth: 2
                 }
             );
             function precomputeIntegral(f, tStart, tEnd, nSteps = 10000) {
                 const dt = (tEnd - tStart) / nSteps;
-                const table = [0]; // integral at tStart = 0
+                const table = [0];
                 let sum = 0;
                 const ts = [tStart];
 
                 for (let i = 1; i <= nSteps; i++) {
                     const t = tStart + i * dt;
                     const prev = t - dt;
-                    sum += 0.5 * (f(prev) + f(t)) * dt; // trapezoid
+                    sum += 0.5 * (f(prev) + f(t)) * dt;
                     table.push(sum);
                     ts.push(t);
                 }
 
                 return function (t) {
-                    // Linear interpolation
+
                     if (t <= tStart) return 0;
                     if (t >= tEnd) return table[table.length - 1];
                     const i = Math.floor((t - tStart) / dt);
@@ -493,13 +550,13 @@
                 };
             }
 
-            const integralFunc = precomputeIntegral(z => Math.sqrt(1 + Math.cos(z) ** 2), 0, 11);
+            const integralFunc = precomputeIntegral(z => Math.sqrt(1 + Math.cos(z) ** 2), 0, 13.05);
 
-            // Parametric functions
+
             const xFunc = t => t - Math.cos(t) * integralFunc(t) / Math.sqrt(1 + Math.cos(t) ** 2);
             const yFunc = t => Math.sin(t) + integralFunc(t) / Math.sqrt(1 + Math.cos(t) ** 2);
 
-            // Draw the parametric curve
+
             drawParametric(canvas, xFunc, yFunc, {
                 origin: { x: width * 0.05, y: height * 0.9 },
                 scaleX: 40,
@@ -507,7 +564,7 @@
                 color: 'purple',
                 lineWidth: 2,
                 tStart: 0,
-                tEnd: 11,
+                tEnd: 13.05,
                 step: 0.01
             });
             drawParametric(canvas, t => -xFunc(t), t => -yFunc(t), {
@@ -522,27 +579,1464 @@
             });
             drawLine(canvas, { x: width / 200, y: Math.sin(width / 200) }, { x: xFunc(width / 200), y: yFunc(width / 200) }, {
                 origin: { x: width * .05, y: height * .90 },
-                scaleX: 40, // pixels per unit in x
-                scaleY: 40, // pixels per unit in y
+                scaleX: 40,
+                scaleY: 40,
                 color: 'cyan',
                 lineWidth: 2,
                 xMax: width
             });
-            const ctx = canvas.getContext("2d");
             ctx.font = "12px Ariel";
             ctx.fillStyle = "red";
-            ctx.fillText("x'", 40 * Math.PI - 20, height - 60)
+            ctx.fillText("x'", 40 * Math.PI / 2 + width * .05, height - 60)
             ctx.fillStyle = "cyan";
             ctx.fillText("f(x')", 15 * width * Math.PI / 200, height - Math.sin(width / 200) - 48)
+            ctx.fillStyle = "white";
+            ctx.beginPath();
+            ctx.arc(40 * xFunc(width / 200) + width * .05, 555 * .9 - 40 * yFunc(width / 200), 5, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.closePath();
         }
         const canvas = document.getElementById("sinasaxis");
+
         draw();
         window.addEventListener('resize', draw);
     </script>
     <small style="text-align: center;">Another note: if you're screen is much wider than mine (1920 pixels), these will
         be too far along for my precombed parametric and baked canvas height. Although I doubt that will be a problem,
-        if the cyan altitude isnt touching the purple function, shorten your window a tad and reload the tab because
-        manual resizing causes the canvas size to twitch.</small>
+        if the cyan altitude isnt touching the purple function, shorten your window a tad.
+    </small>
+    <h3>How is our warped function graphed?</h3>
+    <p>As I said before, our warped functin is a parametric curve, meaning I can frankenstein multiple points together
+        to get the final product. Our first point is the point on the regurlarly graphed axis function, in this case
+        <math>
+            <mi>sin(x)</mi>
+        </math>
+    </p>
+    <canvas id="firstpoint">
+    </canvas>
+    <script>
+        function draw() {
+            canvas2.width = canvas2.clientWidth;
+            canvas2.height = canvas2.clientHeight;
+
+            const width = canvas2.width;
+            const height = canvas2.height;
+
+            const ctx = canvas2.getContext("2d");
+            drawAxes(ctx, width, height, width * .05, height * .90);
+            drawFunctionOnCanvas(canvas2,
+                Math.sin,
+                {
+                    origin: { x: width * .05, y: height * .90 },
+                    scaleX: 40,
+                    scaleY: 40,
+                    color: 'purple',
+                    lineWidth: 2,
+                    xMax: width
+                }
+            );
+            function precomputeIntegral(f, tStart, tEnd, nSteps = 10000) {
+                const dt = (tEnd - tStart) / nSteps;
+                const table = [0];
+                let sum = 0;
+                const ts = [tStart];
+
+                for (let i = 1; i <= nSteps; i++) {
+                    const t = tStart + i * dt;
+                    const prev = t - dt;
+                    sum += 0.5 * (f(prev) + f(t)) * dt;
+                    table.push(sum);
+                    ts.push(t);
+                }
+
+                return function (t) {
+
+                    if (t <= tStart) return 0;
+                    if (t >= tEnd) return table[table.length - 1];
+                    const i = Math.floor((t - tStart) / dt);
+                    const frac = (t - ts[i]) / dt;
+                    return table[i] * (1 - frac) + table[i + 1] * frac;
+                };
+            }
+
+            const integralFunc = precomputeIntegral(z => Math.sqrt(1 + Math.cos(z) ** 2), 0, 13.05);
+
+
+            const xFunc = t => t - Math.cos(t) * integralFunc(t) / Math.sqrt(1 + Math.cos(t) ** 2);
+            const yFunc = t => Math.sin(t) + integralFunc(t) / Math.sqrt(1 + Math.cos(t) ** 2);
+
+
+            drawParametric(canvas2, xFunc, yFunc, {
+                origin: { x: width * 0.05, y: height * 0.9 },
+                scaleX: 40,
+                scaleY: 40,
+                color: 'gray',
+                lineWidth: 2,
+                tStart: 0,
+                tEnd: 13.05,
+                step: 0.01
+            });
+            drawParametric(canvas2, t => -xFunc(t), t => -yFunc(t), {
+                origin: { x: width * 0.05, y: height * 0.9 },
+                scaleX: 40,
+                scaleY: 40,
+                color: 'gray',
+                lineWidth: 2,
+                tStart: 0,
+                tEnd: 1,
+                step: 0.01
+            });
+            drawLine(canvas2, { x: width / 200, y: 0 }, { x: width / 200, y: Math.sin(width / 200) }, {
+                origin: { x: width * .05, y: height * .90 },
+                scaleX: 40,
+                scaleY: 40,
+                color: 'cyan',
+                lineWidth: 2,
+                xMax: width
+            });
+            drawLine(canvas2, { x: 0, y: 0 }, { x: width / 200, y: 0 }, {
+                origin: { x: width * .05, y: height * .90 },
+                scaleX: 40,
+                scaleY: 40,
+                color: 'red',
+                lineWidth: 2,
+                xMax: width
+            });
+            ctx.font = "12px Ariel";
+            ctx.fillStyle = "white";
+            ctx.beginPath();
+            ctx.arc(40 * width / 200 + width * .05, 555 * .9 - 40 * Math.sin(width / 200), 5, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.closePath();
+        }
+        const canvas2 = document.getElementById("firstpoint");
+
+        draw();
+        window.addEventListener('resize', draw);
+    </script>
+    <p>now we have to get the line from that (t,sin(t)) point to the point above it on the warped function. For
+        that we need to calculate x', so that we can compute f(x'); it just so happens that there is a well-known
+        solution to the problem of getting the length of a piece of function: the arc length function (usually denoted
+        as L(x)); from an x value a to an x value b, the length of any given function g is <math>
+            <msubsup>
+                <mo>∫</mo>
+                <mi>a</mi>
+                <mi>b</mi>
+            </msubsup>
+            <msqrt>
+                <mn>1</mn>
+                <mo>+</mo>
+                <msup>
+                    <mi>g'(x)</mi>
+                    <mn>2</mn>
+                </msup>
+            </msqrt>
+            <mi>dx</mi>
+        </math>, so if we are t units along the x-axis, that means we are L(t) units along the X function, AKA x'=L(t)
+        where g=X, a=0, and b=t.</p>
+    <p>Now that we have the length of our connecting line, we need the direction so we can put it all together in the
+        form <math>
+            <mi>(t,X(t))</mi>
+            <mo>+</mo>
+            <mi>f(L(t))</mi>
+            <mi>n</mi>
+        </math> where n is the normal vector of our line (basically what encodes the direction of said line). This is
+        where the word "orthogonal" comes into play. To be orthogonal to a point on a function or curve, your line must
+        be perpendicular to the tangent line of the function at that point. To begin with, lets look at our tangent line
+        at (t,X(t))</p>
+    <canvas id="tangent line">
+    </canvas>
+    <script>
+        function draw() {
+
+            canvas3.width = canvas3.clientWidth;
+            canvas3.height = canvas3.clientHeight;
+
+            const width = canvas3.width;
+            const height = canvas3.height;
+            const ctx = canvas3.getContext("2d");
+            drawAxes(ctx, width, height, width * .05, height * .90);
+            drawFunctionOnCanvas(canvas3,
+                Math.sin,
+                {
+                    origin: { x: width * .05, y: height * .90 },
+                    scaleX: 40,
+                    scaleY: 40,
+                    color: 'purple',
+                    lineWidth: 2,
+                    xMax: width
+                }
+            );
+            function precomputeIntegral(f, tStart, tEnd, nSteps = 10000) {
+                const dt = (tEnd - tStart) / nSteps;
+                const table = [0];
+                let sum = 0;
+                const ts = [tStart];
+
+                for (let i = 1; i <= nSteps; i++) {
+                    const t = tStart + i * dt;
+                    const prev = t - dt;
+                    sum += 0.5 * (f(prev) + f(t)) * dt;
+                    table.push(sum);
+                    ts.push(t);
+                }
+
+                return function (t) {
+
+                    if (t <= tStart) return 0;
+                    if (t >= tEnd) return table[table.length - 1];
+                    const i = Math.floor((t - tStart) / dt);
+                    const frac = (t - ts[i]) / dt;
+                    return table[i] * (1 - frac) + table[i + 1] * frac;
+                };
+            }
+
+            const integralFunc = precomputeIntegral(z => Math.sqrt(1 + Math.cos(z) ** 2), 0, 13.05);
+
+
+            const xFunc = t => t - Math.cos(t) * integralFunc(t) / Math.sqrt(1 + Math.cos(t) ** 2);
+            const yFunc = t => Math.sin(t) + integralFunc(t) / Math.sqrt(1 + Math.cos(t) ** 2);
+
+
+            drawParametric(canvas3, xFunc, yFunc, {
+                origin: { x: width * 0.05, y: height * 0.9 },
+                scaleX: 40,
+                scaleY: 40,
+                color: 'gray',
+                lineWidth: 2,
+                tStart: 0,
+                tEnd: 13.05,
+                step: 0.01
+            });
+            drawParametric(canvas3, t => -xFunc(t), t => -yFunc(t), {
+                origin: { x: width * 0.05, y: height * 0.9 },
+                scaleX: 40,
+                scaleY: 40,
+                color: 'gray',
+                lineWidth: 2,
+                tStart: 0,
+                tEnd: 1,
+                step: 0.01
+            });
+            drawLine(canvas3, { x: width / 200, y: 0 }, { x: width / 200, y: Math.sin(width / 200) }, {
+                origin: { x: width * .05, y: height * .90 },
+                scaleX: 40,
+                scaleY: 40,
+                color: 'cyan',
+                lineWidth: 2,
+                xMax: width
+            });
+            drawLine(canvas3, { x: 0, y: 0 }, { x: width / 200, y: 0 }, {
+                origin: { x: width * .05, y: height * .90 },
+                scaleX: 40,
+                scaleY: 40,
+                color: 'red',
+                lineWidth: 2,
+                xMax: width
+            });
+            drawFunctionOnCanvas(canvas3, x => Math.cos(width / 200) * (x - width / 200) + Math.sin(width / 200), {
+                origin: { x: width * .05, y: height * .90 },
+                scaleX: 40,
+                scaleY: 40,
+                color: 'yellow',
+                lineWidth: 2,
+                xMax: width
+            })
+            ctx.font = "12px Ariel";
+            ctx.fillStyle = "white";
+            ctx.beginPath();
+            ctx.arc(40 * width / 200 + width * .05, 555 * .9 - 40 * Math.sin(width / 200), 5, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.closePath();
+        }
+        const canvas3 = document.getElementById("tangent line");
+
+        draw();
+        window.addEventListener('resize', draw);
+    </script>
+    <p>This tangent line (in yellow) takes the form of X'(t)(x-t)+X(t), meaing its argument is arctan(X'(t)). Now we can
+        go two ways from here: get the normal vector with this argument and then rotate that by 90 degrees
+        counter-clockwise, or we can rotate this line first that get the argument of that orthogonal line for our normal
+        vector. Since we already did the former in the gist section, I will go with the latter this time around. To get
+        the line perpendicular to our tangent line, we must turn our X'(t) slope into a -X'(t)^-1 slope (although be
+        careful, this is a clockwise rotation in disguise and the normal vector must be rotated 180 degrees to
+        compensate, you'll see that with an added pi next to the arctan later).</p>
+    <canvas id="ortho-tangent line">
+    </canvas>
+    <script>
+        function draw() {
+
+            canvas4.width = canvas4.clientWidth;
+            canvas4.height = canvas4.clientHeight;
+
+            const width = canvas4.width;
+            const height = canvas4.height;
+            const ctx = canvas4.getContext("2d");
+            drawAxes(ctx, width, height, width * .05, height * .90);
+            drawFunctionOnCanvas(canvas4,
+                Math.sin,
+                {
+                    origin: { x: width * .05, y: height * .90 },
+                    scaleX: 40,
+                    scaleY: 40,
+                    color: 'purple',
+                    lineWidth: 2,
+                    xMax: width
+                }
+            );
+            function precomputeIntegral(f, tStart, tEnd, nSteps = 10000) {
+                const dt = (tEnd - tStart) / nSteps;
+                const table = [0];
+                let sum = 0;
+                const ts = [tStart];
+
+                for (let i = 1; i <= nSteps; i++) {
+                    const t = tStart + i * dt;
+                    const prev = t - dt;
+                    sum += 0.5 * (f(prev) + f(t)) * dt;
+                    table.push(sum);
+                    ts.push(t);
+                }
+
+                return function (t) {
+
+                    if (t <= tStart) return 0;
+                    if (t >= tEnd) return table[table.length - 1];
+                    const i = Math.floor((t - tStart) / dt);
+                    const frac = (t - ts[i]) / dt;
+                    return table[i] * (1 - frac) + table[i + 1] * frac;
+                };
+            }
+
+            const integralFunc = precomputeIntegral(z => Math.sqrt(1 + Math.cos(z) ** 2), 0, 13.05);
+
+
+            const xFunc = t => t - Math.cos(t) * integralFunc(t) / Math.sqrt(1 + Math.cos(t) ** 2);
+            const yFunc = t => Math.sin(t) + integralFunc(t) / Math.sqrt(1 + Math.cos(t) ** 2);
+
+
+            drawParametric(canvas4, xFunc, yFunc, {
+                origin: { x: width * 0.05, y: height * 0.9 },
+                scaleX: 40,
+                scaleY: 40,
+                color: 'gray',
+                lineWidth: 2,
+                tStart: 0,
+                tEnd: 13.05,
+                step: 0.01
+            });
+            drawParametric(canvas4, t => -xFunc(t), t => -yFunc(t), {
+                origin: { x: width * 0.05, y: height * 0.9 },
+                scaleX: 40,
+                scaleY: 40,
+                color: 'gray',
+                lineWidth: 2,
+                tStart: 0,
+                tEnd: 1,
+                step: 0.01
+            });
+            drawLine(canvas4, { x: width / 200, y: 0 }, { x: width / 200, y: Math.sin(width / 200) }, {
+                origin: { x: width * .05, y: height * .90 },
+                scaleX: 40,
+                scaleY: 40,
+                color: 'cyan',
+                lineWidth: 2,
+                xMax: width
+            });
+            drawLine(canvas4, { x: 0, y: 0 }, { x: width / 200, y: 0 }, {
+                origin: { x: width * .05, y: height * .90 },
+                scaleX: 40,
+                scaleY: 40,
+                color: 'red',
+                lineWidth: 2,
+                xMax: width
+            });
+            drawFunctionOnCanvas(canvas4, x => -1 * Math.cos(width / 200) ** (-1) * (x - width / 200) + Math.sin(width / 200), {
+                origin: { x: width * .05, y: height * .90 },
+                scaleX: 40,
+                scaleY: 40,
+                color: 'yellow',
+                lineWidth: 2,
+                xMax: width
+            })
+            ctx.font = "12px Ariel";
+            ctx.fillStyle = "white";
+            ctx.beginPath();
+            ctx.arc(40 * width / 200 + width * .05, 555 * .9 - 40 * Math.sin(width / 200), 5, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.closePath();
+        }
+        const canvas4 = document.getElementById("ortho-tangent line");
+        draw();
+        window.addEventListener('resize', draw);
+    </script>
+    <p>Hence our new argument is arctan(-X'(t)^-1)+π (our sneeky 180 degree rotation), and our normal vector is
+        (cos(arctan(-X'(t)^-1)+π),sin(arctan(-X'(t)^-1)+π)). Finally we will need to employ our trig-arctrig identities
+        to properly graph in all four directions, but we'll do that in the next section for brevity:</p>
+    <input type="range" min="0" max="13.05" step=".01" id="trace" value="0" />
+    <label for="trace">t value</label>
+    <canvas id="techdone">
+    </canvas>
+    <script>
+        const slider = document.getElementById("trace");
+        let T = parseFloat(slider.value);
+        function draw() {
+
+
+            canvas5.width = canvas5.clientWidth;
+            canvas5.height = canvas5.clientHeight;
+
+            const width = canvas5.width;
+            const height = canvas5.height;
+            const ctx = canvas5.getContext("2d");
+            drawAxes(ctx, width, height, width * .05, height * .90);
+            drawFunctionOnCanvas(canvas5,
+                Math.sin,
+                {
+                    origin: { x: width * .05, y: height * .90 },
+                    scaleX: 40,
+                    scaleY: 40,
+                    color: 'purple',
+                    lineWidth: 2,
+                    xMax: width
+                }
+            );
+            function precomputeIntegral(f, tStart, tEnd, nSteps = 10000) {
+                const dt = (tEnd - tStart) / nSteps;
+                const table = [0];
+                let sum = 0;
+                const ts = [tStart];
+
+                for (let i = 1; i <= nSteps; i++) {
+                    const t = tStart + i * dt;
+                    const prev = t - dt;
+                    sum += 0.5 * (f(prev) + f(t)) * dt;
+                    table.push(sum);
+                    ts.push(t);
+                }
+
+                return function (t) {
+
+                    if (t <= tStart) return 0;
+                    if (t >= tEnd) return table[table.length - 1];
+                    const i = Math.floor((t - tStart) / dt);
+                    const frac = (t - ts[i]) / dt;
+                    return table[i] * (1 - frac) + table[i + 1] * frac;
+                };
+            }
+
+            const integralFunc = precomputeIntegral(z => Math.sqrt(1 + Math.cos(z) ** 2), 0, 13.05);
+
+
+            const xFunc = t => t - Math.cos(t) * integralFunc(t) / Math.sqrt(1 + Math.cos(t) ** 2);
+            const yFunc = t => Math.sin(t) + integralFunc(t) / Math.sqrt(1 + Math.cos(t) ** 2);
+
+
+            drawParametric(canvas5, xFunc, yFunc, {
+                origin: { x: width * 0.05, y: height * 0.9 },
+                scaleX: 40,
+                scaleY: 40,
+                color: 'white',
+                lineWidth: 2,
+                tStart: 0,
+                tEnd: T,
+                step: 0.01
+            });
+
+            drawParametric(canvas5, t => -xFunc(t), t => -yFunc(t), {
+                origin: { x: width * 0.05, y: height * 0.9 },
+                scaleX: 40,
+                scaleY: 40,
+                color: 'white',
+                lineWidth: 2,
+                tStart: 0,
+                tEnd: 1,
+                step: 0.01
+            });
+            drawLine(canvas5, { x: T, y: 0 }, { x: T, y: Math.sin(T) }, {
+                origin: { x: width * .05, y: height * .90 },
+                scaleX: 40,
+                scaleY: 40,
+                color: 'cyan',
+                lineWidth: 2,
+                xMax: width
+            });
+            drawLine(canvas5, { x: 0, y: 0 }, { x: T, y: 0 }, {
+                origin: { x: width * .05, y: height * .90 },
+                scaleX: 40,
+                scaleY: 40,
+                color: 'red',
+                lineWidth: 2,
+                xMax: width
+            });
+
+            drawLine(canvas5, { x: T, y: Math.sin(T) }, { x: xFunc(T), y: yFunc(T) }, {
+                origin: { x: width * .05, y: height * .90 },
+                scaleX: 40,
+                scaleY: 40,
+                color: 'yellow',
+                lineWidth: 2,
+                xMax: width
+            });
+
+            drawLine(canvas5, { x: T, y: Math.sin(T) }, { x: (xFunc(T) - T) / (Math.sqrt((xFunc(T) - T) ** 2 + (yFunc(T) - Math.sin(T)) ** 2)) + T, y: Math.sin(T) }, {
+                origin: { x: width * .05, y: height * .90 },
+                scaleX: 40,
+                scaleY: 40,
+                color: 'magenta',
+                lineWidth: 2,
+                xMax: width
+            });
+            drawLine(canvas5, { x: (xFunc(T) - T) / (Math.sqrt((xFunc(T) - T) ** 2 + (yFunc(T) - Math.sin(T)) ** 2)) + T, y: Math.sin(T) }, { x: (xFunc(T) - T) / (Math.sqrt((xFunc(T) - T) ** 2 + (yFunc(T) - Math.sin(T)) ** 2)) + T, y: (yFunc(T) - Math.sin(T)) / (Math.sqrt((xFunc(T) - T) ** 2 + (yFunc(T) - Math.sin(T)) ** 2)) + Math.sin(T) }, {
+                origin: { x: width * .05, y: height * .90 },
+                scaleX: 40,
+                scaleY: 40,
+                color: 'green',
+                lineWidth: 2,
+                xMax: width
+            });
+            ctx.font = "12px Ariel";
+            ctx.fillStyle = "white";
+            ctx.beginPath();
+            ctx.arc(40 * T + width * .05, 555 * .9 - 40 * Math.sin(T), 5, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.closePath();
+            ctx.beginPath();
+            ctx.arc(40 * xFunc(T) + width * .05, 555 * .9 - 40 * yFunc(T), 5, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.closePath();
+        }
+        const canvas5 = document.getElementById("techdone");
+        draw();
+        window.addEventListener('resize', draw);
+        slider.addEventListener("input", function () {
+            T = parseFloat(this.value)
+            draw()
+        })
+    </script>
+    <small>final note: the magenta green normal vector look wierd when t is close to zero, dont mind that.</small>
+    <h3>But if You Keep the Camera Rolling</h3>
+    <p>The final step in this derivation is our trig-arctrig identities, and then some clean up to get where we were
+        before:</p>
+    <ul>
+        <li><math display="block" class="tml-display" style="display:block math;">
+                <mrow>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>t</mi>
+                    <mo separator="true">,</mo>
+                    <mi>X</mi>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>t</mi>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mo>+</mo>
+                    <mi>f</mi>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>L</mi>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>t</mi>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mrow>
+                        <mi>cos</mi>
+                        <mo>⁡</mo>
+                    </mrow>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <msup>
+                        <mi>tan</mi>
+                        <mrow>
+                            <mo lspace="0em" rspace="0em">−</mo>
+                            <mn>1</mn>
+                        </mrow>
+                    </msup>
+                    <mo>⁡</mo>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mo form="prefix" stretchy="false">−</mo>
+                    <mi>X</mi>
+                    <mo class="tml-prime">′</mo>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>t</mi>
+                    <msup>
+                        <mo form="postfix" stretchy="false">)</mo>
+                        <mrow>
+                            <mo lspace="0em" rspace="0em">−</mo>
+                            <mn>1</mn>
+                        </mrow>
+                    </msup>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mo>+</mo>
+                    <mi>π</mi>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mo separator="true">,</mo>
+                    <mrow>
+                        <mi>sin</mi>
+                        <mo>⁡</mo>
+                    </mrow>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <msup>
+                        <mi>tan</mi>
+                        <mrow>
+                            <mo lspace="0em" rspace="0em">−</mo>
+                            <mn>1</mn>
+                        </mrow>
+                    </msup>
+                    <mo>⁡</mo>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mo form="prefix" stretchy="false">−</mo>
+                    <mi>X</mi>
+                    <mo class="tml-prime">′</mo>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>t</mi>
+                    <msup>
+                        <mo form="postfix" stretchy="false">)</mo>
+                        <mrow>
+                            <mo lspace="0em" rspace="0em">−</mo>
+                            <mn>1</mn>
+                        </mrow>
+                    </msup>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mo>+</mo>
+                    <mi>π</mi>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mo form="postfix" stretchy="false">)</mo>
+                </mrow>
+            </math></li>
+        <li><math display="block" class="tml-display" style="display:block math;">
+                <mrow>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>t</mi>
+                    <mo separator="true">,</mo>
+                    <mi>X</mi>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>t</mi>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mo>+</mo>
+                    <mi>f</mi>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>L</mi>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>t</mi>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mo form="prefix" stretchy="false">−</mo>
+                    <mrow>
+                        <mi>cos</mi>
+                        <mo>⁡</mo>
+                    </mrow>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <msup>
+                        <mi>tan</mi>
+                        <mrow>
+                            <mo lspace="0em" rspace="0em">−</mo>
+                            <mn>1</mn>
+                        </mrow>
+                    </msup>
+                    <mo>⁡</mo>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mo form="prefix" stretchy="false">−</mo>
+                    <mi>X</mi>
+                    <mo class="tml-prime">′</mo>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>t</mi>
+                    <msup>
+                        <mo form="postfix" stretchy="false">)</mo>
+                        <mrow>
+                            <mo lspace="0em" rspace="0em">−</mo>
+                            <mn>1</mn>
+                        </mrow>
+                    </msup>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mo separator="true">,</mo>
+                    <mo form="prefix" stretchy="false">−</mo>
+                    <mrow>
+                        <mi>sin</mi>
+                        <mo>⁡</mo>
+                    </mrow>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <msup>
+                        <mi>tan</mi>
+                        <mrow>
+                            <mo lspace="0em" rspace="0em">−</mo>
+                            <mn>1</mn>
+                        </mrow>
+                    </msup>
+                    <mo>⁡</mo>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mo form="prefix" stretchy="false">−</mo>
+                    <mi>X</mi>
+                    <mo class="tml-prime">′</mo>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>t</mi>
+                    <msup>
+                        <mo form="postfix" stretchy="false">)</mo>
+                        <mrow>
+                            <mo lspace="0em" rspace="0em">−</mo>
+                            <mn>1</mn>
+                        </mrow>
+                    </msup>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mo form="postfix" stretchy="false">)</mo>
+                </mrow>
+            </math></li>
+        <li><math display="block" class="tml-display" style="display:block math;">
+                <mrow>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>t</mi>
+                    <mo separator="true">,</mo>
+                    <mi>X</mi>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>t</mi>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mo>+</mo>
+                    <mi>f</mi>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>L</mi>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>t</mi>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mo form="prefix" stretchy="false">−</mo>
+                    <mfrac>
+                        <mn>1</mn>
+                        <mrow>
+                            <msqrt>
+                                <mo form="prefix" stretchy="false">(</mo>
+                            </msqrt>
+                            <mn>1</mn>
+                            <mo>+</mo>
+                            <mo form="prefix" stretchy="false">(</mo>
+                            <mo form="prefix" stretchy="false">−</mo>
+                            <mi>X</mi>
+                            <mo class="tml-prime">′</mo>
+                            <mo form="prefix" stretchy="false">(</mo>
+                            <mi>t</mi>
+                            <msup>
+                                <mo form="postfix" stretchy="false">)</mo>
+                                <mrow>
+                                    <mo lspace="0em" rspace="0em">−</mo>
+                                    <mn>1</mn>
+                                </mrow>
+                            </msup>
+                            <msup>
+                                <mo form="postfix" stretchy="false">)</mo>
+                                <mn>2</mn>
+                            </msup>
+                            <mo form="postfix" stretchy="false" lspace="0em" rspace="0em">)</mo>
+                        </mrow>
+                    </mfrac>
+                    <mo separator="true">,</mo>
+                    <mo form="prefix" stretchy="false">−</mo>
+                    <mfrac>
+                        <mrow>
+                            <mo lspace="0em" rspace="0em">−</mo>
+                            <mi>X</mi>
+                            <mo class="tml-prime">′</mo>
+                            <mo form="prefix" stretchy="false">(</mo>
+                            <mi>t</mi>
+                            <msup>
+                                <mo form="postfix" stretchy="false">)</mo>
+                                <mrow>
+                                    <mo lspace="0em" rspace="0em">−</mo>
+                                    <mn>1</mn>
+                                </mrow>
+                            </msup>
+                        </mrow>
+                        <mrow>
+                            <msqrt>
+                                <mo form="prefix" stretchy="false">(</mo>
+                            </msqrt>
+                            <mn>1</mn>
+                            <mo>+</mo>
+                            <mo form="prefix" stretchy="false">(</mo>
+                            <mo form="prefix" stretchy="false">−</mo>
+                            <mi>X</mi>
+                            <mo class="tml-prime">′</mo>
+                            <mo form="prefix" stretchy="false">(</mo>
+                            <mi>t</mi>
+                            <msup>
+                                <mo form="postfix" stretchy="false">)</mo>
+                                <mrow>
+                                    <mo lspace="0em" rspace="0em">−</mo>
+                                    <mn>1</mn>
+                                </mrow>
+                            </msup>
+                            <msup>
+                                <mo form="postfix" stretchy="false">)</mo>
+                                <mn>2</mn>
+                            </msup>
+                            <mo form="postfix" stretchy="false" lspace="0em" rspace="0em">)</mo>
+                        </mrow>
+                    </mfrac>
+                    <mo form="postfix" stretchy="false">)</mo>
+                </mrow>
+            </math></li>
+        <li><math display="block" class="tml-display" style="display:block math;">
+                <mrow>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>t</mi>
+                    <mo separator="true">,</mo>
+                    <mi>X</mi>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>t</mi>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mo>+</mo>
+                    <mi>f</mi>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>L</mi>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>t</mi>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mo form="prefix" stretchy="false">−</mo>
+                    <mfrac>
+                        <mn>1</mn>
+                        <mrow>
+                            <msqrt>
+                                <mo form="prefix" stretchy="false">(</mo>
+                            </msqrt>
+                            <mn>1</mn>
+                            <mo>+</mo>
+                            <mi>X</mi>
+                            <mo class="tml-prime">′</mo>
+                            <mo form="prefix" stretchy="false">(</mo>
+                            <mi>t</mi>
+                            <msup>
+                                <mo form="postfix" stretchy="false">)</mo>
+                                <mrow>
+                                    <mo lspace="0em" rspace="0em">−</mo>
+                                    <mn>2</mn>
+                                </mrow>
+                            </msup>
+                            <mo form="postfix" stretchy="false" lspace="0em" rspace="0em">)</mo>
+                        </mrow>
+                    </mfrac>
+                    <mo separator="true">,</mo>
+                    <mo form="prefix" stretchy="false">−</mo>
+                    <mfrac>
+                        <mrow>
+                            <mo lspace="0em" rspace="0em">−</mo>
+                            <mi>X</mi>
+                            <mo class="tml-prime">′</mo>
+                            <mo form="prefix" stretchy="false">(</mo>
+                            <mi>t</mi>
+                            <msup>
+                                <mo form="postfix" stretchy="false">)</mo>
+                                <mrow>
+                                    <mo lspace="0em" rspace="0em">−</mo>
+                                    <mn>1</mn>
+                                </mrow>
+                            </msup>
+                        </mrow>
+                        <mrow>
+                            <msqrt>
+                                <mo form="prefix" stretchy="false">(</mo>
+                            </msqrt>
+                            <mn>1</mn>
+                            <mo>+</mo>
+                            <mi>X</mi>
+                            <mo class="tml-prime">′</mo>
+                            <mo form="prefix" stretchy="false">(</mo>
+                            <mi>t</mi>
+                            <msup>
+                                <mo form="postfix" stretchy="false">)</mo>
+                                <mrow>
+                                    <mo lspace="0em" rspace="0em">−</mo>
+                                    <mn>2</mn>
+                                </mrow>
+                            </msup>
+                            <mo form="postfix" stretchy="false" lspace="0em" rspace="0em">)</mo>
+                        </mrow>
+                    </mfrac>
+                    <mo form="postfix" stretchy="false">)</mo>
+                </mrow>
+            </math></li>
+        <li><math display="block" class="tml-display" style="display:block math;">
+                <mrow>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>t</mi>
+                    <mo separator="true">,</mo>
+                    <mi>X</mi>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>t</mi>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mo>+</mo>
+                    <mi>f</mi>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>L</mi>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>t</mi>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mo form="prefix" stretchy="false">−</mo>
+                    <mfrac>
+                        <mrow>
+                            <mi>X</mi>
+                            <mo class="tml-prime">′</mo>
+                            <mo form="prefix" stretchy="false">(</mo>
+                            <mi>t</mi>
+                            <mo form="postfix" stretchy="false" lspace="0em" rspace="0em">)</mo>
+                        </mrow>
+                        <mrow>
+                            <mi>X</mi>
+                            <mo class="tml-prime">′</mo>
+                            <mo form="prefix" stretchy="false">(</mo>
+                            <mi>t</mi>
+                            <mo form="postfix" stretchy="false" lspace="0em" rspace="0em">)</mo>
+                        </mrow>
+                    </mfrac>
+                    <mfrac>
+                        <mn>1</mn>
+                        <mrow>
+                            <msqrt>
+                                <mo form="prefix" stretchy="false">(</mo>
+                            </msqrt>
+                            <mn>1</mn>
+                            <mo>+</mo>
+                            <mi>X</mi>
+                            <mo class="tml-prime">′</mo>
+                            <mo form="prefix" stretchy="false">(</mo>
+                            <mi>t</mi>
+                            <msup>
+                                <mo form="postfix" stretchy="false">)</mo>
+                                <mrow>
+                                    <mo lspace="0em" rspace="0em">−</mo>
+                                    <mn>2</mn>
+                                </mrow>
+                            </msup>
+                            <mo form="postfix" stretchy="false" lspace="0em" rspace="0em">)</mo>
+                        </mrow>
+                    </mfrac>
+                    <mo separator="true">,</mo>
+                    <mo form="prefix" stretchy="false">−</mo>
+                    <mfrac>
+                        <mrow>
+                            <mi>X</mi>
+                            <mo class="tml-prime">′</mo>
+                            <mo form="prefix" stretchy="false">(</mo>
+                            <mi>t</mi>
+                            <mo form="postfix" stretchy="false" lspace="0em" rspace="0em">)</mo>
+                        </mrow>
+                        <mrow>
+                            <mi>X</mi>
+                            <mo class="tml-prime">′</mo>
+                            <mo form="prefix" stretchy="false">(</mo>
+                            <mi>t</mi>
+                            <mo form="postfix" stretchy="false" lspace="0em" rspace="0em">)</mo>
+                        </mrow>
+                    </mfrac>
+                    <mfrac>
+                        <mrow>
+                            <mo lspace="0em" rspace="0em">−</mo>
+                            <mi>X</mi>
+                            <mo class="tml-prime">′</mo>
+                            <mo form="prefix" stretchy="false">(</mo>
+                            <mi>t</mi>
+                            <msup>
+                                <mo form="postfix" stretchy="false">)</mo>
+                                <mrow>
+                                    <mo lspace="0em" rspace="0em">−</mo>
+                                    <mn>1</mn>
+                                </mrow>
+                            </msup>
+                        </mrow>
+                        <mrow>
+                            <msqrt>
+                                <mo form="prefix" stretchy="false">(</mo>
+                            </msqrt>
+                            <mn>1</mn>
+                            <mo>+</mo>
+                            <mi>X</mi>
+                            <mo class="tml-prime">′</mo>
+                            <mo form="prefix" stretchy="false">(</mo>
+                            <mi>t</mi>
+                            <msup>
+                                <mo form="postfix" stretchy="false">)</mo>
+                                <mrow>
+                                    <mo lspace="0em" rspace="0em">−</mo>
+                                    <mn>2</mn>
+                                </mrow>
+                            </msup>
+                            <mo form="postfix" stretchy="false" lspace="0em" rspace="0em">)</mo>
+                        </mrow>
+                    </mfrac>
+                    <mo form="postfix" stretchy="false">)</mo>
+                </mrow>
+            </math></li>
+        <li><math display="block" class="tml-display" style="display:block math;">
+                <mrow>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>t</mi>
+                    <mo separator="true">,</mo>
+                    <mi>X</mi>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>t</mi>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mo>+</mo>
+                    <mi>f</mi>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>L</mi>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>t</mi>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mo form="prefix" stretchy="false">−</mo>
+                    <mfrac>
+                        <mrow>
+                            <mi>X</mi>
+                            <mo class="tml-prime">′</mo>
+                            <mo form="prefix" stretchy="false">(</mo>
+                            <mi>t</mi>
+                            <mo form="postfix" stretchy="false" lspace="0em" rspace="0em">)</mo>
+                        </mrow>
+                        <mrow>
+                            <msqrt>
+                                <mo form="prefix" stretchy="false">(</mo>
+                            </msqrt>
+                            <mi>X</mi>
+                            <mo class="tml-prime">′</mo>
+                            <mo form="prefix" stretchy="false">(</mo>
+                            <mi>t</mi>
+                            <msup>
+                                <mo form="postfix" stretchy="false">)</mo>
+                                <mn>2</mn>
+                            </msup>
+                            <mo>+</mo>
+                            <mi>X</mi>
+                            <mo class="tml-prime">′</mo>
+                            <mo form="prefix" stretchy="false">(</mo>
+                            <mi>t</mi>
+                            <msup>
+                                <mo form="postfix" stretchy="false">)</mo>
+                                <mn>2</mn>
+                            </msup>
+                            <mi>X</mi>
+                            <mo class="tml-prime">′</mo>
+                            <mo form="prefix" stretchy="false">(</mo>
+                            <mi>t</mi>
+                            <msup>
+                                <mo form="postfix" stretchy="false">)</mo>
+                                <mrow>
+                                    <mo lspace="0em" rspace="0em">−</mo>
+                                    <mn>2</mn>
+                                </mrow>
+                            </msup>
+                            <mo form="postfix" stretchy="false" lspace="0em" rspace="0em">)</mo>
+                        </mrow>
+                    </mfrac>
+                    <mo separator="true">,</mo>
+                    <mo form="prefix" stretchy="false">−</mo>
+                    <mfrac>
+                        <mrow>
+                            <mo lspace="0em" rspace="0em">−</mo>
+                            <mi>X</mi>
+                            <mo class="tml-prime">′</mo>
+                            <mo form="prefix" stretchy="false">(</mo>
+                            <mi>t</mi>
+                            <mo form="postfix" stretchy="false">)</mo>
+                            <mi>X</mi>
+                            <mo class="tml-prime">′</mo>
+                            <mo form="prefix" stretchy="false">(</mo>
+                            <mi>t</mi>
+                            <msup>
+                                <mo form="postfix" stretchy="false">)</mo>
+                                <mrow>
+                                    <mo lspace="0em" rspace="0em">−</mo>
+                                    <mn>1</mn>
+                                </mrow>
+                            </msup>
+                        </mrow>
+                        <mrow>
+                            <msqrt>
+                                <mo form="prefix" stretchy="false">(</mo>
+                            </msqrt>
+                            <mi>X</mi>
+                            <mo class="tml-prime">′</mo>
+                            <mo form="prefix" stretchy="false">(</mo>
+                            <mi>t</mi>
+                            <msup>
+                                <mo form="postfix" stretchy="false">)</mo>
+                                <mn>2</mn>
+                            </msup>
+                            <mo>+</mo>
+                            <mi>X</mi>
+                            <mo class="tml-prime">′</mo>
+                            <mo form="prefix" stretchy="false">(</mo>
+                            <mi>t</mi>
+                            <msup>
+                                <mo form="postfix" stretchy="false">)</mo>
+                                <mn>2</mn>
+                            </msup>
+                            <mi>X</mi>
+                            <mo class="tml-prime">′</mo>
+                            <mo form="prefix" stretchy="false">(</mo>
+                            <mi>t</mi>
+                            <msup>
+                                <mo form="postfix" stretchy="false">)</mo>
+                                <mrow>
+                                    <mo lspace="0em" rspace="0em">−</mo>
+                                    <mn>2</mn>
+                                </mrow>
+                            </msup>
+                            <mo form="postfix" stretchy="false" lspace="0em" rspace="0em">)</mo>
+                        </mrow>
+                    </mfrac>
+                    <mo form="postfix" stretchy="false">)</mo>
+                </mrow>
+            </math></li>
+        <li><math display="block" class="tml-display" style="display:block math;">
+                <mrow>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>t</mi>
+                    <mo separator="true">,</mo>
+                    <mi>X</mi>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>t</mi>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mo>+</mo>
+                    <mi>f</mi>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>L</mi>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>t</mi>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mo form="prefix" stretchy="false">−</mo>
+                    <mfrac>
+                        <mrow>
+                            <mi>X</mi>
+                            <mo class="tml-prime">′</mo>
+                            <mo form="prefix" stretchy="false">(</mo>
+                            <mi>t</mi>
+                            <mo form="postfix" stretchy="false" lspace="0em" rspace="0em">)</mo>
+                        </mrow>
+                        <mrow>
+                            <msqrt>
+                                <mo form="prefix" stretchy="false">(</mo>
+                            </msqrt>
+                            <mi>X</mi>
+                            <mo class="tml-prime">′</mo>
+                            <mo form="prefix" stretchy="false">(</mo>
+                            <mi>t</mi>
+                            <msup>
+                                <mo form="postfix" stretchy="false">)</mo>
+                                <mn>2</mn>
+                            </msup>
+                            <mo>+</mo>
+                            <mn>1</mn>
+                            <mo form="postfix" stretchy="false" lspace="0em" rspace="0em">)</mo>
+                        </mrow>
+                    </mfrac>
+                    <mo separator="true">,</mo>
+                    <mo form="prefix" stretchy="false">−</mo>
+                    <mfrac>
+                        <mrow>
+                            <mo lspace="0em" rspace="0em">−</mo>
+                            <mn>1</mn>
+                        </mrow>
+                        <mrow>
+                            <msqrt>
+                                <mo form="prefix" stretchy="false">(</mo>
+                            </msqrt>
+                            <mi>X</mi>
+                            <mo class="tml-prime">′</mo>
+                            <mo form="prefix" stretchy="false">(</mo>
+                            <mi>t</mi>
+                            <msup>
+                                <mo form="postfix" stretchy="false">)</mo>
+                                <mn>2</mn>
+                            </msup>
+                            <mo>+</mo>
+                            <mn>1</mn>
+                            <mo form="postfix" stretchy="false" lspace="0em" rspace="0em">)</mo>
+                        </mrow>
+                    </mfrac>
+                    <mo form="postfix" stretchy="false">)</mo>
+                </mrow>
+            </math></li>
+        <li><math display="block" class="tml-display" style="display:block math;">
+                <mrow>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>t</mi>
+                    <mo separator="true">,</mo>
+                    <mi>X</mi>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>t</mi>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mo>+</mo>
+                    <mi>f</mi>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>L</mi>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>t</mi>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mo form="prefix" stretchy="false">−</mo>
+                    <mfrac>
+                        <mrow>
+                            <mi>X</mi>
+                            <mo class="tml-prime">′</mo>
+                            <mo form="prefix" stretchy="false">(</mo>
+                            <mi>t</mi>
+                            <mo form="postfix" stretchy="false" lspace="0em" rspace="0em">)</mo>
+                        </mrow>
+                        <mrow>
+                            <mi>L</mi>
+                            <mo class="tml-prime">′</mo>
+                            <mo form="prefix" stretchy="false">(</mo>
+                            <mi>t</mi>
+                            <mo form="postfix" stretchy="false" lspace="0em" rspace="0em">)</mo>
+                        </mrow>
+                    </mfrac>
+                    <mo separator="true">,</mo>
+                    <mfrac>
+                        <mn>1</mn>
+                        <mrow>
+                            <mi>L</mi>
+                            <mo class="tml-prime">′</mo>
+                            <mo form="prefix" stretchy="false">(</mo>
+                            <mi>t</mi>
+                            <mo form="postfix" stretchy="false" lspace="0em" rspace="0em">)</mo>
+                        </mrow>
+                    </mfrac>
+                    <mo form="postfix" stretchy="false">)</mo>
+                </mrow>
+            </math></li>
+        <li><math display="block" class="tml-display" style="display:block math;">
+                <mrow>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>t</mi>
+                    <mo separator="true">,</mo>
+                    <mi>X</mi>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>t</mi>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mo>+</mo>
+                    <mi>f</mi>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>L</mi>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>t</mi>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mfrac>
+                        <mrow>
+                            <mo form="prefix" stretchy="false" lspace="0em" rspace="0em">(</mo>
+                            <mo form="prefix" stretchy="false">−</mo>
+                            <mi>X</mi>
+                            <mo class="tml-prime">′</mo>
+                            <mo form="prefix" stretchy="false">(</mo>
+                            <mi>t</mi>
+                            <mo form="postfix" stretchy="false">)</mo>
+                            <mo separator="true">,</mo>
+                            <mn>1</mn>
+                            <mo form="postfix" stretchy="false" lspace="0em" rspace="0em">)</mo>
+                        </mrow>
+                        <mrow>
+                            <mi>L</mi>
+                            <mo class="tml-prime">′</mo>
+                            <mo form="prefix" stretchy="false">(</mo>
+                            <mi>t</mi>
+                            <mo form="postfix" stretchy="false" lspace="0em" rspace="0em">)</mo>
+                        </mrow>
+                    </mfrac>
+                </mrow>
+            </math></li>
+        <li><math display="block" class="tml-display" style="display:block math;">
+                <mrow>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>t</mi>
+                    <mo separator="true">,</mo>
+                    <mi>X</mi>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>t</mi>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mo>+</mo>
+                    <mfrac>
+                        <mrow>
+                            <mi>f</mi>
+                            <mo form="prefix" stretchy="false">(</mo>
+                            <mi>L</mi>
+                            <mo form="prefix" stretchy="false">(</mo>
+                            <mi>t</mi>
+                            <mo form="postfix" stretchy="false">)</mo>
+                            <mo form="postfix" stretchy="false" lspace="0em" rspace="0em">)</mo>
+                        </mrow>
+                        <mrow>
+                            <mi>L</mi>
+                            <mo class="tml-prime">′</mo>
+                            <mo form="prefix" stretchy="false">(</mo>
+                            <mi>t</mi>
+                            <mo form="postfix" stretchy="false" lspace="0em" rspace="0em">)</mo>
+                        </mrow>
+                    </mfrac>
+                    <msub>
+                        <mi>R</mi>
+                        <mrow>
+                            <mo lspace="0em" rspace="0em">−</mo>
+                            <mfrac>
+                                <mi>π</mi>
+                                <mn>2</mn>
+                            </mfrac>
+                        </mrow>
+                    </msub>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mn>1</mn>
+                    <mo separator="true">,</mo>
+                    <mi>X</mi>
+                    <mo class="tml-prime">′</mo>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>t</mi>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mo form="postfix" stretchy="false">)</mo>
+                </mrow>
+            </math></li>
+        <li><math display="block" class="tml-display" style="display:block math;">
+                <mrow>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>t</mi>
+                    <mo separator="true">,</mo>
+                    <mi>X</mi>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>t</mi>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mo>+</mo>
+                    <mfrac>
+                        <mrow>
+                            <mi>f</mi>
+                            <mo form="prefix" stretchy="false">(</mo>
+                            <mi>L</mi>
+                            <mo form="prefix" stretchy="false">(</mo>
+                            <mi>t</mi>
+                            <mo form="postfix" stretchy="false">)</mo>
+                            <mo form="postfix" stretchy="false" lspace="0em" rspace="0em">)</mo>
+                        </mrow>
+                        <mrow>
+                            <mi>L</mi>
+                            <mo class="tml-prime">′</mo>
+                            <mo form="prefix" stretchy="false">(</mo>
+                            <mi>t</mi>
+                            <mo form="postfix" stretchy="false" lspace="0em" rspace="0em">)</mo>
+                        </mrow>
+                    </mfrac>
+                    <mfrac>
+                        <mtext>d</mtext>
+                        <mrow>
+                            <mtext>d</mtext>
+                            <mi>t</mi>
+                        </mrow>
+                    </mfrac>
+                    <msub>
+                        <mi>R</mi>
+                        <mrow>
+                            <mo lspace="0em" rspace="0em">−</mo>
+                            <mfrac>
+                                <mi>π</mi>
+                                <mn>2</mn>
+                            </mfrac>
+                        </mrow>
+                    </msub>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>t</mi>
+                    <mo separator="true">,</mo>
+                    <mi>X</mi>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>t</mi>
+                    <mo form="postfix" stretchy="false">)</mo>
+                    <mo form="postfix" stretchy="false">)</mo>
+                </mrow>
+            </math></li>
+    </ul>
+    <h2 id="bwtm">But Wait! There's More.</h2>
+    <p>Beyond derivation, I'm going to spotlight some intresting things that I have found warping functions:</p>
+    <h3>Encoding Vertical Shift</h3>
+    <p>You can encode the vertical shift f(x)+c (for any arbitrary constant c) by using the warp W(f(x),c), I don't know
+        how you would do horizontal shift (I'm going to guess it's impossible but who knows).</p>
+    <h3>Encoding Rotation</h3>
+    <p>By warping a function f to a linear equation ax, you are rotating f by arctan(a), now granted that means you
+        can only rotate by between -π/2 and π/2 but it's still neat. Furthermore, you can combine both ax and c to
+        rotate and shift a function by doing W(f(x),ax+c).</p>
+    <h3>Wierd Periods</h3>
+    <p>I noticed while looking at W(sin(x),cos(x)), it looks as if the period is 28π, yet there are perceptible phase
+        changes. I assume that these phase changes will add up eventually to get so very close to the principle period,
+        yet will fall just a smidge short due to sine and cosine bing phase shifts of eachother. I haven't looked at
+        periodic functions with intersecting zeroes, but I bet
+        that's where the real periods are found.</p>
+    <h3>Encoding Inverses</h3>
+    back to our rotation, when the a in ax goes to either infinity, W(f(x),ax) approahces (-f(t),t), meaning if you do
+    W(sin(x),&infin;x), it looks like arcsin(-x) but beyond its domain.
+    <h3>Arclength Lower Bound</h3>
+    <p>If you try to morph a function onto ln or any other logarthm, you run into some problems. This is due to the fact
+        that the lower bound of our arclength function is 0, simply changing this to <math>
+            <msup>
+                <mn>0</mn>
+                <mo>+</mo>
+            </msup>
+        </math> will fix the problem. On another note, changing the lower bound of the arclength will slide the morphed
+        function along the axis function. If you wanted <math>
+            <mrow>
+                <mi>W</mi>
+                <mo form="prefix" stretchy="false">(</mo>
+                <mrow>
+                    <mi>sin</mi>
+                    <mo>⁡</mo>
+                </mrow>
+                <mo form="prefix" stretchy="false">(</mo>
+                <mi>x</mi>
+                <mo form="postfix" stretchy="false">)</mo>
+                <mo separator="true">,</mo>
+                <msup>
+                    <mi>x</mi>
+                    <mn class="tml-sml-pad">2</mn>
+                </msup>
+                <mo>−</mo>
+                <mn>3</mn>
+                <mi>x</mi>
+                <mo>+</mo>
+                <mn>5</mn>
+                <mo form="postfix" stretchy="false">)</mo>
+            </mrow>
+        </math> to intersect the vertex of <math>
+            <mrow>
+                <msup>
+                    <mi>x</mi>
+                    <mn class="tml-sml-pad">2</mn>
+                </msup>
+                <mo>−</mo>
+            </mrow>
+            <mrow>
+                <mn>3</mn>
+                <mi>x</mi>
+                <mo>+</mo>
+            </mrow>
+            <mrow>
+                <mn>5</mn>
+            </mrow>
+        </math>, you need to change the lower bound of L to <math>
+            <mfrac>
+                <mn>3</mn>
+                <mn>2</mn>
+            </mfrac>
+        </math>.</p>
 </body>
 
 </html>
