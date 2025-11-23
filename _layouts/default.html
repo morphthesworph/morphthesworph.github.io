@@ -37,18 +37,21 @@
       sizes="512x512"
       type="image/png"
     />
-<link rel="stylesheet" href="../style.css">
-<style>
-  body::before{
-    background:black url("../photos/BFSLDark.png") no-repeat center / contain;
-  }
-</style>
+    <link rel="stylesheet" href="../style.css" />
+    <style>
+      body::before {
+        background: black url("../photos/BFSLDark.png") no-repeat center /
+          contain;
+      }
+    </style>
+    {{ page.head }}
   </head>
   <body>
     <div class="sidebar">
       <a href="/index.html">Home</a>
       <a href="/about.html">About</a>
       <a href="/projects.html">Projects</a>
+      <a href="projects/FunctionWarping" style="margin-left: 15%;">Function Warping</a>
       <a href="/ramblings.html">Ramblings</a>
     </div>
     {{ content }}
