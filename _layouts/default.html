@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -6,38 +6,40 @@
     <title>Quark</title>
     <link
       rel="icon"
-      href="photos/favicons/favicon-dark.ico"
+      href="../photos/favicons/favicon-dark.ico"
       type="image/x-icon"
     />
     <link
       rel="icon"
-      href="photos/favicons/favicon-96x96-dark.png"
+      href="../photos/favicons/favicon-96x96-dark.png"
       sizes="96x96"
       type="image/png"
     />
     <link
       rel="icon"
-      href="photos/favicons/favicon-dark.svg"
+      href="../photos/favicons/favicon-dark.svg"
       type="image/svg+xml"
     />
     <link
       rel="apple-touch-icon"
-      href="photos/favicons/apple-touch-icon-dark.png"
+      href="../photos/favicons/apple-touch-icon-dark.png"
     />
-    <link rel="manifest" href="photos/favicons/site.webmanifest" />
+    <link rel="manifest" href="../photos/favicons/site.webmanifest" />
     <link
       rel="icon"
-      href="photos/favicons/web-app-manifest-192x192-dark.png"
+      href="../photos/favicons/web-app-manifest-192x192-dark.png"
       sizes="192x192"
       type="image/png"
     />
     <link
       rel="icon"
-      href="photos/favicons/web-app-manifest-512x512-dark.png"
+      href="../photos/favicons/web-app-manifest-512x512-dark.png"
       sizes="512x512"
       type="image/png"
     />
     <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="Temml-Local.css" />
+    <script src="temml.min.js" defer></script>
     <style>
       body::before {
         background: black url("../photos/BFSLDark.png") no-repeat center /
@@ -51,8 +53,9 @@
       <a href="/index.html">Home</a>
       <a href="/about.html">About</a>
       <a href="/projects.html">Projects</a>
-      <a href="/projects/FunctionWarping" style="margin-left: 15%;">Function Warping</a>
-      <a href="/ramblings.html">Ramblings</a>
+      <a href="/projects/FunctionWarping" style="margin-left: 15%"
+        >Function Warping</a
+      >
     </div>
     {{ content }}
   </body>

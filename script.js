@@ -6,7 +6,6 @@ function integrate(f, xStart, xEnd, n = 1000) {
     const x = xStart + i * dx;
     sum += f(x);
   }
-
   return sum * dx;
 }
 function xToCanvas(x, originX, scaleX) {

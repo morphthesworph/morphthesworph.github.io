@@ -376,7 +376,14 @@ layout: default
                 </math>.</li>
         </ul>
         now you could stop here... but if you keep the cameras rolling, I'd rearrange this into the nicer albeit less
-        coherent equation: <math display="block">
+        coherent equation:<span id="block-math"></span>
+        <script>
+        // Run after the deferred script and DOM have loaded
+        document.addEventListener("DOMContentLoaded", () => {
+        temml.render("W(f,X)=(t,X(t))+\\frac{f(L(t))}{L'(t)}\\frac{d}{dt}R_{-\\pi/2}(t,X(t))", document.getElementById("block-math"), { displayMode: true });
+        });
+        </script>
+        <math display="block">
             <mrow>
                 <mi> W(f,X) </mi>
                 <mo> = </mo>
