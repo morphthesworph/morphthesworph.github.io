@@ -6,9 +6,27 @@ scripts:
   - /assets/js/graph.js
   - /assets/js/function-warping.js
 ---
+<style>
+  .pair-columns {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 3 equal-width columns */
+    gap: 20px;
+  }
+</style>
 <div>
     <h1 style="text-align: center">Polygrams</h1>
     <p style="text-align: center">
-        Polygrams are a sibling subject to polygons, down below are some of my notes on them.
+        Polygrams are parent object to polygons, down below are some of my notes on them.
     </p>
+</div>
+<div>
+    <h2>What are polygrams?</h2>
+    <p>
+        Like I said before, polygrams encapsulates polygons; what makes a polygram not a polygon is self-intersection and the fact that a polygram can consist of multiple sets of edges that don't need to intersect.
+        The most famous examples of this are the pentagram and star of david.
+    </p>
+    <div class="pair-columns">
+        <div class="col"><svg link="/photos/Five-Pointed-Star_Lined.svg"></svg></div>
+        <div class="col"><svg link="/photos/Star-of-david-thm.svg"></svg></div>
+    </div>
 </div>
