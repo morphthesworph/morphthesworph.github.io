@@ -1,22 +1,6 @@
 # morphthesworph.github.io
 
-My personal page ("Quark"). Plain Jekyll on GitHub Pages — no build step of my own.
-
-## Layout
-
-```
-_layouts/default.html      page shell (sidebar, head, scripts)
-assets/css/style.css       site styles
-assets/css/temml.css       Temml's stylesheet (+ Temml.woff2 next to it)
-assets/js/temml.min.js     Temml 0.14.0
-assets/js/math.js          turns $...$ / $$...$$ into math on page load
-assets/js/graph.js         small canvas-graphing helper
-photos/                    backgrounds + favicons
-projects/                  one HTML file per project
-```
-
-Anything inside a folder starting with `_` is **not** copied to the live site
-by Jekyll, so scripts/styles/fonts must live outside `_layouts/`.
+My personal page ("Quark").
 
 ## New page
 
