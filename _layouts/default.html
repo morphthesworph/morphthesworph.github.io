@@ -3,58 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Quark</title>
-    <link
-      rel="icon"
-      href="/photos/favicons/favicon-dark.ico"
-      type="image/x-icon"
-    />
-    <link
-      rel="icon"
-      href="/photos/favicons/favicon-96x96-dark.png"
-      sizes="96x96"
-      type="image/png"
-    />
-    <link
-      rel="icon"
-      href="/photos/favicons/favicon-dark.svg"
-      type="image/svg+xml"
-    />
-    <link
-      rel="apple-touch-icon"
-      href="/photos/favicons/apple-touch-icon-dark.png"
-    />
+    <title>{{ page.title | default: "Quark" }}</title>
+
+    <link rel="icon" href="/photos/favicons/favicon-dark.ico" type="image/x-icon" />
+    <link rel="icon" href="/photos/favicons/favicon-96x96-dark.png" sizes="96x96" type="image/png" />
+    <link rel="icon" href="/photos/favicons/favicon-dark.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/photos/favicons/apple-touch-icon-dark.png" />
     <link rel="manifest" href="/photos/favicons/site.webmanifest" />
-    <link
-      rel="icon"
-      href="/photos/favicons/web-app-manifest-192x192-dark.png"
-      sizes="192x192"
-      type="image/png"
-    />
-    <link
-      rel="icon"
-      href="/photos/favicons/web-app-manifest-512x512-dark.png"
-      sizes="512x512"
-      type="image/png"
-    />
-    <link rel="stylesheet" href="/style.css" />
-    <link rel="stylesheet" href="/_layouts/Temml-Local.css" />
-    <script src="/_layouts/temml.min.js" defer></script>
-    <style>
-      body::before {
-        background: black url("/photos/BFSLDark.png") no-repeat center /
-          contain;
-      }
-    </style>
-    {{ page.head }}
+
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <link rel="stylesheet" href="/assets/css/temml.css" />
+
+    <script src="/assets/js/temml.min.js" defer></script>
+    <script src="/assets/js/math.js" defer></script>
+    {% for src in page.scripts %}<script src="{{ src }}" defer></script>
+    {% endfor %}
   </head>
-  <body>
-    <div class="sidebar">
-      <a href="/index.html">Home</a>
-      <a href="/projects/FunctionWarping" style="margin-left: 15%"
-        >Function Warping</a
-      >
-    </div>
+  <body style="--bg-image: url('{{ page.bg | default: '/photos/BFSLDark.png' }}')">
+    <nav class="sidebar">
+      <a href="/">Home</a>
+      <a href="/projects/FunctionWarping" class="sub">Function Warping</a>
+    </nav>
     {{ content }}
   </body>
 </html>

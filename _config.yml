@@ -1,0 +1,5 @@
+title: Quark
+
+# Not part of the site; keep them out of the build output.
+exclude:
+  - README.md

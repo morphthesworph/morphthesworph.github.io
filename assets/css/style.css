@@ -6,6 +6,7 @@ body::before {
   width: 90%;
   height: 100%;
 
+  background: black var(--bg-image) no-repeat center / contain;
   filter: blur(4px) brightness(1);
   z-index: -2;
 }
@@ -25,7 +26,6 @@ body {
   margin: 5px;
   padding-left: 10%;
   color: white;
-  text-wrap: word;
 }
 
 .sidebar {
@@ -45,6 +45,10 @@ body {
   color: #ddd;
   font-size: 18px;
   transition: background 0.3s;
+}
+
+.sidebar a.sub {
+  margin-left: 15%;
 }
 
 .sidebar a:hover {
